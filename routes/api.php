@@ -102,7 +102,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['return-json']], static functio
                 Route::post('createFollow', [FollowController::class, 'createFollow']);     //TODO deprecated: Remove this after 2023-02-28 (new: /user/{id}/follow)
                 Route::delete('destroyFollow', [FollowController::class, 'destroyFollow']); //TODO deprecated: Remove this after 2023-02-28 (new: /user/{id}/follow)
             });
-            Route::group(['middleware' => ['scope:write-followers']], static function(){
+            Route::group(['middleware' => ['scope:write-followers']], static function() {
                 Route::delete('removeFollower', [FollowController::class, 'removeFollower']);
                 Route::delete('rejectFollowRequest', [FollowController::class, 'rejectFollowRequest']);
                 Route::put('approveFollowRequest', [FollowController::class, 'approveFollowRequest']);
@@ -186,4 +186,12 @@ Route::group(['prefix' => 'v1', 'middleware' => ['return-json']], static functio
             Route::get('leaderboard/{month}', [StatisticsController::class, 'leaderboardForMonth']);
         });
     });
-}); 
+});
+
+Route::prefix('admin')->middleware([
+                                       'auth:api', 'userrole:5' //TODO: REAL AUTH!!!
+                                   ])->group(function() {
+    Route::apiResources([
+                            'user' => \App\Http\Controllers\API\Admin\UserController::class,
+                        ]);
+});

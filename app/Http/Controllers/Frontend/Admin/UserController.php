@@ -45,23 +45,4 @@ class UserController
             'user' => $user
         ]);
     }
-
-    public function updateMail(Request $request): RedirectResponse {
-        $validated   = $request->validate([
-                                              'id'    => ['required', 'integer', 'exists:users,id'],
-                                              'email' => ['required', 'email', 'unique:users,email']
-                                          ]);
-        $user        = User::findOrFail($validated['id']);
-        $user->email = $validated['email'];
-        $user->save();
-        try {
-            $user->sendEmailVerificationNotification();
-        } catch (RateLimitExceededException) {
-            // Ignore
-        }
-        if ($user->password === null) {
-            $this->sendResetLinkEmail($request);
-        }
-        return redirect()->route('admin.users.user', ['id' => $validated['id']]);
-    }
 }

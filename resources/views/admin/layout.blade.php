@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{{ mix('css/admin.css') }}">
         <link rel="shortcut icon" href="{{ asset('images/icons/touch-icon-vector.svg') }}"/>
         <script src="{{ mix('js/admin.js') }}"></script>
+        <script src="{{ mix('js/api.js') }}"></script>
     </head>
 
     <body>

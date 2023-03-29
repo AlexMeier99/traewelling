@@ -8,3 +8,4 @@ window.Popper = require("@popperjs/core");
 
 require("bootstrap");
 require("leaflet");
+require("./notyf");

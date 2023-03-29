@@ -49,6 +49,19 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>
+                                <label class="form-check-label" for="check-sb">Shadow Banned</label>
+                            </th>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="check-sb"
+                                           {{$user->shadow_banned ? 'checked' : ''}}
+                                           onchange="AdminUser.update({{$user->id}}, {'shadow_banned': this.checked ? '1' : '0'}).then(function(response) {if (response.success) {notyf.success('Saved successfully!');} else {notyf.error('Error ' + response.status + ' ' + response.statusText);}})"
+                                    />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Password</th>
                             <td>
                                 @isset($user->password)
