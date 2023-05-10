@@ -31,9 +31,9 @@
                     <small class="font-weight-light">{{ '@'. $user->username }}</small>
                     @auth
                         @include('includes.follow-button')
-                        @if(auth()->user()->id != $user->id)
-                            <x-mute-button :user="$user"/>
-                            <x-block-button :user="$user"/>
+                        @if(auth()->user()->id !== $user->id)
+                            <!-- ToDo: Mute Button -->
+                            <!-- ToDo: Block Button -->
                         @endif
                     @endauth
                 </span>
